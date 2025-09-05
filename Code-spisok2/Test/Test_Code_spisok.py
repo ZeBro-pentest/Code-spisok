@@ -61,7 +61,7 @@ class TestHelp: #✅
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
 
-class TestAdd:
+class TestAdd: #✅
     @pytest.mark.parametrize("value, expected", [
         ("good", "'good'"),    # test 1
         (123, "123"),          # test 2
@@ -77,7 +77,7 @@ class TestAdd:
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
 
-class TestClear:
+class TestClear: #✅
     @pytest.mark.parametrize("value, expected", [
         ("mtr", "'mtr'"),      # test 1
         (1456, "1456"),        # test 2
@@ -95,7 +95,7 @@ class TestClear:
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
 
-class TestElementCheck:
+class TestElementCheck: #✅
     @pytest.mark.parametrize("value, expected, type_repr", [
         ("glass", "'glass'", "<class 'str'>"),       # test 1
         (1456, "1456", "<class 'int'>"),             # test 2
@@ -112,7 +112,7 @@ class TestElementCheck:
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
 
-class TestExit:
+class TestExit: #✅
     @pytest.mark.parametrize("value", [
         ("exit"),       # test 1
     ])
@@ -124,7 +124,7 @@ class TestExit:
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
 
-class TestFdElement:
+class TestFdElement: #✅
     @pytest.mark.parametrize("value, expected", [
         ("Sokelzi", "Sokelzi"),         # test 1
         (14432, "14432"),               # test 2
@@ -150,3 +150,4 @@ class TestRemove:
 
 class TestReverse:
     pass
+
