@@ -4,7 +4,7 @@ import subprocess
 
 def run_test(user_input: str, expected_outputs: list[str]):
     process = subprocess.run(
-        ["python", "Code_Spisok.py"], # файл который тестируем!!!
+        ["python", "Code_spisok.py"], # файл который тестируем!!!
         input=user_input,
         capture_output=True,
         text=True,
@@ -118,4 +118,5 @@ class TestRemove:
     pass
 
 class TestReverse:
+
     pass
