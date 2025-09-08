@@ -79,7 +79,7 @@ while True:
         if element1 in my_list:
             element2 = convert_input(input("Введите свой 'элемент', который хотите поставить: "))
             my_list[my_list.index(element1)] = element2
-            print(f"Элемент '{element1}' заменён на '{element2} из списка '{list_name}''")
+            print(f"Элемент '{element1}' заменён на '{element2}' из списка '{list_name}'")
         else:
             print(f"Элемент '{element1}' не найден в списке.")
 
