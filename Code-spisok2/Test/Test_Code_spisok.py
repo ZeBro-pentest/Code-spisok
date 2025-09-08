@@ -140,7 +140,7 @@ class TestFdElement: #✅
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
     
-class TestFdIndex:
+class TestFdIndex: #✅
     @pytest.mark.parametrize("value, expected",[
         ("Sokelzi", "Sokelzi"),         # test 1
         (14432, "14432"),               # test 2
@@ -157,7 +157,7 @@ class TestFdIndex:
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
 
-class TestRem_el:
+class TestRem_el: #✅
     @pytest.mark.parametrize("value, expected",[
         ("Sokelzi", "Sokelzi"),         # test 1
         (14432, "14432"),               # test 2
@@ -174,7 +174,7 @@ class TestRem_el:
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
 
-class TestRem_ind:
+class TestRem_ind: #✅
     @pytest.mark.parametrize("value, expected",[
         ("Sokelzi", "Sokelzi"),         # test 1
         (14432, "14432"),               # test 2
@@ -191,7 +191,7 @@ class TestRem_ind:
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
     
-class TestRen:
+class TestRen: #✅
     @pytest.mark.parametrize("value, expected",[
         ("Sokelzi", "Sokelzi"),           # test 1
         (14432, "14432"),                 # test 2
@@ -207,7 +207,7 @@ class TestRen:
             f"'{expected}'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
     
-class TestRep_el:
+class TestRep_el: #✅
     @pytest.mark.parametrize("value, expected, value2, expected2",[
         ("Sokelzi", "Sokelzi", "Sokelzi2", "Sokelzi2"),         # test 1 кавычки необходимы для команды show
         (14432, "14432", 282828, "282828"),                       # test 2
@@ -224,7 +224,7 @@ class TestRep_el:
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
         
-class TestRep_ind:
+class TestRep_ind: #✅
     @pytest.mark.parametrize("value, expected, value2, expected2",[
         ("Sokelzi", "Sokelzi", "Sokelzi2", "Sokelzi2"),         # test 1 кавычки необходимы для команды show
         (14432, "14432", 282828, "282828"),                       # test 2
@@ -240,3 +240,4 @@ class TestRep_ind:
             f"'Spisok'>> Введите 'индекс' чтобы заменить элемент: Введите свой 'элемент' который хотите заменить: Элемент индекса '0' заменён на '{expected2}' из списка 'Spisok'",
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
+
