@@ -79,17 +79,16 @@ class TestAdd: #✅
 
 class TestClear: #✅
     @pytest.mark.parametrize("value, expected", [
-        ("mtr", "'mtr'"),      # test 1
-        (1456, "1456"),        # test 2
-        (13, "13"),            # test 3
+        ("Sokelzi", "Sokelzi"),       # test 1 незабыть одинарные-кавычки!
+        (14432, "14432"),               # test 2
+        (13.234, "13.234"),             # test 3
     ])
     def test_clear(self, value, expected):
-        user_input = f"Spisok\nadd\n{value}\nshow\nclear\nshow\nexit\ny\n"
+        user_input = f"Spisok\nadd\n{value}\nclear\nshow\nexit\ny\n"
         
         run_test(user_input, [
             "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
-            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{value}' добавлен в список 'Spisok'.",
-            f"'Spisok'>> Содержимое списка 'Spisok':[{expected}]",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{expected}' добавлен в список 'Spisok'.",
             "'Spisok'>> Список очищен.",
             "'Spisok'>> Содержимое списка 'Spisok':[]",
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
@@ -108,7 +107,7 @@ class TestElementCheck: #✅
             "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
             f"'Spisok'>> Введите элемент для добавления в список: Элемент '{value}' добавлен в список 'Spisok'.",
             f"'Spisok'>> Содержимое списка 'Spisok':[{expected}]",
-            f"'Spisok'>> [{value}] -- {type_repr} <index '0'>",  # используем полное представление типа
+            f"'Spisok'>> [{value}] -- {type_repr} <index '0'>",  # используем полное представление типа, индекс 0 потомучто элемент один
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
 
@@ -135,19 +134,109 @@ class TestFdElement: #✅
         
         run_test(user_input, [
             "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
-            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{value}' добавлен в список 'Spisok'.",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{expected}' добавлен в список 'Spisok'.",
+            # test
             f"'Spisok'>> Введите индекс чтобы узнать элемент: Элемент: '{expected}'",
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
     
-
-
 class TestFdIndex:
-    pass
+    @pytest.mark.parametrize("value, expected",[
+        ("Sokelzi", "Sokelzi"),         # test 1
+        (14432, "14432"),               # test 2
+        (13.234, "13.234"),             # test 3
+    ])
+    def test_fd_index(self, value, expected):
+        user_input = f"Spisok\nadd\n{value}\nfd_ind\n{value}\nexit\ny\n"
+        
+        run_test(user_input, [
+            "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{expected}' добавлен в список 'Spisok'.",
+            # test
+            f"'Spisok'>> Введите элемент чтобы узнать индекс: Индекс: '0'",
+            "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+        ])
 
-class TestRemove:
-    pass
+class TestRem_el:
+    @pytest.mark.parametrize("value, expected",[
+        ("Sokelzi", "Sokelzi"),         # test 1
+        (14432, "14432"),               # test 2
+        (13.234, "13.234"),             # test 3
+    ])
+    def test_rm_element(self, value, expected):
+        user_input = f"Spisok\nadd\n{value}\nrem_el\n{value}\nexit\ny\n"
+        
+        run_test(user_input, [
+            "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{expected}' добавлен в список 'Spisok'.",
+            # test
+            f"'Spisok'>> Введите элемент для удаления: Элемент '{expected}' удалён из списка 'Spisok'.",
+            "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+        ])
 
-class TestReverse:
-    pass
-
+class TestRem_ind:
+    @pytest.mark.parametrize("value, expected",[
+        ("Sokelzi", "Sokelzi"),         # test 1
+        (14432, "14432"),               # test 2
+        (13.234, "13.234"),             # test 3
+    ])
+    def test_rm_index(self, value, expected):
+        user_input = f"Spisok\nadd\n{value}\nrem_ind\n0\nexit\ny\n"
+        
+        run_test(user_input, [
+            "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{expected}' добавлен в список 'Spisok'.",
+            # test
+            f"'Spisok'>> Введите индекс элемента: Элемент индекса [0] удален из списка 'Spisok'",
+            "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+        ])
+    
+class TestRen:
+    @pytest.mark.parametrize("value, expected",[
+        ("Sokelzi", "Sokelzi"),           # test 1
+        (14432, "14432"),                 # test 2
+        (13.234, "13.234"),               # test 3
+    ])
+    def test_ren(self, value, expected):
+        user_input = f"Spisok\nren\n{value}\nexit\ny\n"
+        
+        run_test(user_input, [
+            "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
+            # test
+            "'Spisok'>> Введите новое название списка: Список переименован.",
+            f"'{expected}'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+        ])
+    
+class TestRep_el:
+    @pytest.mark.parametrize("value, expected, value2, expected2",[
+        ("Sokelzi", "Sokelzi", "Sokelzi2", "Sokelzi2"),         # test 1 кавычки необходимы для команды show
+        (14432, "14432", 282828, "282828"),                       # test 2
+        (13.234, "13.234", 29.29, "29.29"),                       # test 3
+    ])
+    def test_rep_element(self, value, expected, value2, expected2):
+        user_input = f"Spisok\nadd\n{value}\nrep_el\n{value}\n{value2}\nexit\ny\n"
+        
+        run_test(user_input, [
+            "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{expected}' добавлен в список 'Spisok'.",
+            # test
+            f"'Spisok'>> Введите 'элемент' чтобы заменить его: Введите свой 'элемент', который хотите поставить: Элемент '{expected}' заменён на '{expected2}' из списка 'Spisok'",
+            "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+        ])
+        
+class TestRep_ind:
+    @pytest.mark.parametrize("value, expected, value2, expected2",[
+        ("Sokelzi", "Sokelzi", "Sokelzi2", "Sokelzi2"),         # test 1 кавычки необходимы для команды show
+        (14432, "14432", 282828, "282828"),                       # test 2
+        (13.234, "13.234", 29.29, "29.29"),                       # test 3
+    ])
+    def test_rep_index(self, value, value2, expected, expected2):
+        user_input = f"Spisok\nadd\n{value}\nrep_ind\n0\n{value2}\nexit\ny\n"
+        
+        run_test(user_input, [
+            "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{expected}' добавлен в список 'Spisok'.",
+            # test
+            f"'Spisok'>> Введите 'индекс' чтобы заменить элемент: Введите свой 'элемент' который хотите заменить: Элемент индекса '0' заменён на '{expected2}' из списка 'Spisok'",
+            "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+        ])
