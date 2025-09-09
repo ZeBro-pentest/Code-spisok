@@ -226,7 +226,7 @@ class TestRep_el: #✅
         
 class TestRep_ind: #✅
     @pytest.mark.parametrize("value, expected, value2, expected2",[
-        ("Sokelzi", "Sokelzi", "Sokelzi2", "Sokelzi2"),         # test 1 кавычки необходимы для команды show
+        ("Sokelzi", "Sokelzi", "Sokelzi2", "Sokelzi2"),           # test 1
         (14432, "14432", 282828, "282828"),                       # test 2
         (13.234, "13.234", 29.29, "29.29"),                       # test 3
     ])
@@ -240,4 +240,24 @@ class TestRep_ind: #✅
             f"'Spisok'>> Введите 'индекс' чтобы заменить элемент: Введите свой 'элемент' который хотите заменить: Элемент индекса '0' заменён на '{expected2}' из списка 'Spisok'",
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
         ])
-
+        
+class TestRev: #✅
+        @pytest.mark.parametrize("value, value2, value3, expected1, expected2, expected3",[
+        ("Sokelzi", 14432, 13.234, "'Sokelzi'", 14432, 13.234),         # test 1 кавычки необходимы для команды show
+    ])
+        def test_revers(self, value, value2, value3, expected1, expected2, expected3):
+            user_input = f"Spisok\nadd\n{value}\nadd\n{value2}\nadd\n{value3}\nshow\nrev\nexit\ny\n"
+            
+            run_test(user_input, [
+            "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{value}' добавлен в список 'Spisok'.",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{value2}' добавлен в список 'Spisok'.",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{value3}' добавлен в список 'Spisok'.",
+            # test
+            f"'Spisok'>> Содержимое списка 'Spisok':[{expected1}, {expected2}, {expected3}]",
+            f"'Spisok'>> Перевернутый лист: [{expected3}, {expected2}, {expected1}]",
+            "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+            ])
+            
+class TestShow:
+    pass
