@@ -12,7 +12,7 @@ def run_test(user_input: str, expected_outputs: list[str]):
         input=user_input,
         capture_output=True,
         text=True,
-        # encoding="utf-8", # мешает запускать в cmd!!!
+        encoding="utf-8", # мешает запускать в cmd!!!
         timeout=5,
     )
     
@@ -67,7 +67,7 @@ class TestHelp: #✅
 
 class TestAdd: #✅
     @pytest.mark.parametrize("value, expected", [
-        ("good", "'good'"),    # test 1
+        ("good", "'good'"),    # test 1  test 1 кавычки необходимы для команды show и rev
         (123, "123"),          # test 2
         (12.32, "12.32"),      # test 3
     ])
@@ -83,7 +83,7 @@ class TestAdd: #✅
 
 class TestClear: #✅
     @pytest.mark.parametrize("value, expected", [
-        ("Sokelzi", "Sokelzi"),       # test 1 незабыть одинарные-кавычки!
+        ("Sokelzi", "Sokelzi"),         # test 1
         (14432, "14432"),               # test 2
         (13.234, "13.234"),             # test 3
     ])
@@ -116,15 +116,15 @@ class TestElementCheck: #✅
         ])
 
 class TestExit: #✅
-    @pytest.mark.parametrize("value", [
-        ("exit"),       # test 1
+    @pytest.mark.parametrize("value, expected",[
+        ("exit", "Вы точно хотите выйти из программы? [Y]-да [N]-нет : "),       # test 1
     ])
-    def test_exit(self, value):
+    def test_exit(self, value, expected):
         user_input = f"Spisok\n{value}\ny\n"
         
         run_test(user_input, [
             "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
-            "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+            f"'Spisok'>> {expected}"
         ])
 
 class TestFdElement: #✅
@@ -213,7 +213,7 @@ class TestRen: #✅
     
 class TestRep_el: #✅
     @pytest.mark.parametrize("value, expected, value2, expected2",[
-        ("Sokelzi", "Sokelzi", "Sokelzi2", "Sokelzi2"),         # test 1 кавычки необходимы для команды show
+        ("Sokelzi", "Sokelzi", "Sokelzi2", "Sokelzi2"),           # test 1
         (14432, "14432", 282828, "282828"),                       # test 2
         (13.234, "13.234", 29.29, "29.29"),                       # test 3
     ])
@@ -247,7 +247,7 @@ class TestRep_ind: #✅
         
 class TestRev: #✅
         @pytest.mark.parametrize("value, value2, value3, expected1, expected2, expected3",[
-        ("Sokelzi", 14432, 13.234, "'Sokelzi'", 14432, 13.234),         # test 1 кавычки необходимы для команды show
+        ("Sokelzi", 14432, 13.234, "'Sokelzi'", 14432, 13.234),         # test 1 кавычки необходимы для команды show и rev
     ])
         def test_revers(self, value, value2, value3, expected1, expected2, expected3):
             user_input = f"Spisok\nadd\n{value}\nadd\n{value2}\nadd\n{value3}\nshow\nrev\nexit\ny\n"
@@ -263,5 +263,19 @@ class TestRev: #✅
             "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
             ])
             
-class TestShow:
-    pass
+class TestShow: #✅
+    @pytest.mark.parametrize("value, expected", [
+        ("Sokelzi", "'Sokelzi'"),           # test 1 кавычки необходимы для команды show и rev
+        (14432, "14432"),                   # test 2
+        (13.234, "13.234"),                 # test 3
+    ])
+    def test_exit(self, value, expected):
+        user_input = f"Spisok\nadd\n{value}\nshow\nexit\ny\n"
+        
+        run_test(user_input, [
+            "Введите название списка: Список 'Spisok' создан. Введите команды для управления списком. Список команд - 'help'",
+            f"'Spisok'>> Введите элемент для добавления в список: Элемент '{value}' добавлен в список 'Spisok'.",
+            # test
+            f"'Spisok'>> Содержимое списка 'Spisok':[{expected}]",
+            "'Spisok'>> Вы точно хотите выйти из программы? [Y]-да [N]-нет :"
+        ])
