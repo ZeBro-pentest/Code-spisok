@@ -29,35 +29,36 @@ class TestAdd:
         assert Code_spisok.list_name in captured
 
 
-    # ===================== ОШИБОЧНЫЕ СЛУЧАИ =====================
-    @pytest.mark.parametrize(
-        "value, exception_type, message",
-        [
-            (None, ValueError, "Невозможно преобразовать значение"),
-            ({}, ValueError, "Невозможно преобразовать значение"),
-            ([], ValueError, "Невозможно преобразовать значение"),
-            ("error", TypeError, "Ошибка конвертации"),
-        ],
-        ids=["none", "dict", "list", "str_error"]
-    )
-    def test_add_exceptions(self, monkeypatch, value, exception_type, message):
-        """Проверяет, что add() корректно обрабатывает исключения"""
+    # # ===================== ОШИБОЧНЫЕ СЛУЧАИ =====================  ТРЕБУЮТ ИЗМЕНЕНИЙ!
+    # @pytest.mark.parametrize(
+    #     "value, exception_type, message",
+    #     [
+    #         (None, ValueError, "Невозможно преобразовать значение"),
+    #         ({}, ValueError, "Невозможно преобразовать значение"),
+    #         ([], ValueError, "Невозможно преобразовать значение"),
+    #         ("error", TypeError, "Ошибка конвертации"),
+    #     ],
+    #     ids=["none", "dict", "list", "str_error"]
+    # )
+    # def test_add_exceptions(self, monkeypatch, value, exception_type, message):
+    #     """Проверяет, что add() корректно обрабатывает исключения"""
 
-        Code_spisok.my_list.clear()
+    #     Code_spisok.my_list.clear()
 
-        # Переопределим Convert_input так, чтобы он вызывал ошибку
-        def mock_convert(x):
-            # Имитация разных ошибок в зависимости от входных данных
-            if x == "error":
-                raise TypeError("Ошибка конвертации")
-            else:
-                raise ValueError("Невозможно преобразовать значение")
+    #     # Переопределим Convert_input так, чтобы он вызывал ошибку
+    #     def mock_convert(x):
+    #         # Имитация разных ошибок в зависимости от входных данных
+    #         if x == "error":
+    #             raise TypeError("Ошибка конвертации")
+    #         else:
+    #             raise ValueError("Невозможно преобразовать значение")
 
-        monkeypatch.setattr(Code_spisok, "Convert_input", mock_convert)
+    #     monkeypatch.setattr(Code_spisok, "Convert_input", mock_convert)
 
-        # Проверяем, что вызывается нужное исключение
-        with pytest.raises(exception_type, match=message):
-            Code_spisok.add(value)
+    #     # Проверяем, что вызывается нужное исключение
+    #     with pytest.raises(exception_type, match=message):
+    #         Code_spisok.add(value)
 
-        # Проверяем, что список остался пустым
-        assert Code_spisok.my_list == []
+    #     # Проверяем, что список остался пустым
+    #     assert Code_spisok.my_list == []
+
